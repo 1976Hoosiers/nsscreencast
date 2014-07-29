@@ -35,6 +35,7 @@
 - (CLLocationManager *)locationManager {
     if (!_locationManager) {
         _locationManager = [[CLLocationManager alloc] init];
+      
         _locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
         _locationManager.delegate = self;
     }
@@ -48,6 +49,7 @@
 - (void)zoomToLocation:(CLLocation *)location radius:(CGFloat)radius {
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(location.coordinate, radius * 2, radius * 2);
     [self.mapView setRegion:region animated:YES];
+    self.mapView.showsUserLocation = YES;
 }
 
 - (void)fetchVenuesForLocation:(CLLocation *)location {
@@ -78,7 +80,7 @@
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     CLLocation *location = [locations lastObject];
     [self fetchVenuesForLocation:location];
-    [self zoomToLocation:location radius:2000];
+    [self zoomToLocation:location radius:20000];
     
     [self.locationManager stopUpdatingLocation];
 }

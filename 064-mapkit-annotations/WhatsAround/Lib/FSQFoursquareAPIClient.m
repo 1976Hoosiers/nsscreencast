@@ -19,7 +19,7 @@
         NSURL *baseUrl = [NSURL URLWithString:FOURSQUARE_BASE_URL];
         _sharedClient = [[FSQFoursquareAPIClient alloc] initWithBaseURL:baseUrl];
     });
-    
+    NSLog(@"%@ this is the url...i think", _sharedClient );
     return _sharedClient;
 }
 
